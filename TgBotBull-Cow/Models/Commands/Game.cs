@@ -22,6 +22,13 @@ namespace TgBotBull_Cow.Models.Commands
         {
             var chatId = message.Chat.Id;
             var messageId = message.MessageId;
+            int res;
+            bool isInt = Int32.TryParse(message.Text, out res);
+            if (!isInt)
+            {
+                await client.SendTextMessageAsync(chatId, "Введите 4-значное число с неповторяющимися цифрами!");
+                return;
+            }
             string code = "";
             string result = "";
             char[] codeMess = message.Text.ToCharArray();
